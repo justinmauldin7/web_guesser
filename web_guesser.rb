@@ -17,10 +17,19 @@ def guess_check(string_guess)
   end
 end
 
-
+def color_check(result)
+  if (result == "Way too low!") || (result == "Way too high!")
+    "#7f0303"
+  elsif (result == "Too low!") || (result == "Too high!")
+    "#f29d9d"
+  else
+    "#429b36"
+  end
+end
 
 get '/' do
   guess = params["guess"]
   message = guess_check(guess)
-  erb :index, :locals => {:number => NUMBER, :message => message}
+  color = color_check(message)
+  erb :index, :locals => {:number => NUMBER, :color => color, :message => message}
 end
